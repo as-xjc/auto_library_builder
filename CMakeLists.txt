@@ -20,7 +20,7 @@ ExternalProject_Add(libz
         EXCLUDE_FROM_ALL 1
         URL http://prdownloads.sourceforge.net/libpng/zlib-1.2.11.tar.gz?download
         CMAKE_CACHE_ARGS
-            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
+#            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
             -DCMAKE_BUILD_TYPE:STRING=Release
             -DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_PATH}
         )
@@ -96,7 +96,6 @@ ExternalProject_Add(libprotobuf
         URL https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-cpp-3.6.1.tar.gz
         SOURCE_SUBDIR cmake
         CMAKE_CACHE_ARGS
-            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
             -DCMAKE_BUILD_TYPE:STRING=Release
             -Dprotobuf_BUILD_TESTS:BOOL=OFF
             -Dprotobuf_WITH_ZLIB:BOOL=OFF
@@ -108,7 +107,6 @@ ExternalProject_Add(libc-ares
         EXCLUDE_FROM_ALL 1
         URL https://c-ares.haxx.se/download/c-ares-1.15.0.tar.gz
         CMAKE_CACHE_ARGS
-            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
             -DCARES_SHARED:BOOL=OFF
             -DCARES_STATIC:BOOL=ON
             -DCARES_STATIC_PIC:BOOL=ON
@@ -121,7 +119,6 @@ ExternalProject_Add(libgrpc
         URL https://github.com/grpc/grpc/archive/v1.18.0.tar.gz
         CMAKE_CACHE_ARGS
             -DCMAKE_BUILD_TYPE:STRING=Release
-            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
             -DgRPC_INSTALL:BOOL=ON
             -DgRPC_BUILD_TESTS:BOOL=OFF
             -DCMAKE_PREFIX_PATH:PATH=${INSTALL_PATH}
@@ -146,20 +143,27 @@ ExternalProject_Add(libmongoc
         EXCLUDE_FROM_ALL 1
         URL https://github.com/mongodb/mongo-c-driver/releases/download/1.13.0/mongo-c-driver-1.13.0.tar.gz
         CMAKE_CACHE_ARGS
-            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
             -DCMAKE_BUILD_TYPE:STRING=Release
             -DENABLE_AUTOMATIC_INIT_AND_CLEANUP:BOOL=OFF
             -DCMAKE_PREFIX_PATH:PATH=${INSTALL_PATH}
             -DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_PATH}
         )
 
-ExternalProject_Add(libcpprest
-        DEPENDS libboost libopenssl
+ExternalProject_Add(libwebsocketpp
         EXCLUDE_FROM_ALL 1
-        URL https://github.com/Microsoft/cpprestsdk/archive/v2.10.5.tar.gz
+        URL https://github.com/zaphoyd/websocketpp/archive/0.8.1.tar.gz
+        CMAKE_CACHE_ARGS
+            -DCMAKE_BUILD_TYPE:STRING=Release
+            -DCMAKE_PREFIX_PATH:PATH=${INSTALL_PATH}
+            -DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_PATH}
+        )
+
+ExternalProject_Add(libcpprest
+        DEPENDS libboost libopenssl libcpprest
+        EXCLUDE_FROM_ALL 1
+        URL https://github.com/Microsoft/cpprestsdk/archive/v2.10.10.tar.gz
         SOURCE_SUBDIR Release
         CMAKE_CACHE_ARGS
-            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=TRUE
             -DCMAKE_BUILD_TYPE:STRING=Release
             -DBUILD_SHARED_LIBS:BOOL=OFF
             -DCMAKE_PREFIX_PATH:PATH=${INSTALL_PATH}
