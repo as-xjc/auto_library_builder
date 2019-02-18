@@ -38,7 +38,7 @@ ExternalProject_Add(libboost
 ExternalProject_Add(libopenssl
         EXCLUDE_FROM_ALL 1
         URL https://www.openssl.org/source/openssl-1.0.2q.tar.gz
-        CONFIGURE_COMMAND ./config --prefix=${INSTALL_PATH}
+        CONFIGURE_COMMAND ./config --prefix=${INSTALL_PATH} -fPIC
         BUILD_IN_SOURCE 1
         BUILD_COMMAND make
         INSTALL_COMMAND make install
